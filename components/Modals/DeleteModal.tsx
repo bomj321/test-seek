@@ -1,20 +1,18 @@
 import React, { useRef } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { IModalDelete } from "@interfaces/IModal";
-
+import { IModal } from "@interfaces/IModal";
+import { useDispatch, useSelector } from "react-redux";
+import { removeTask, remove } from "@store/slices/tasksSlice";
 import { Toast } from "primereact/toast";
-//import { showSuccess, showError } from '@lib/ToastMessages';
-//import { IDocumentResponse } from '@interfaces/IDocument';
-//import { HttpStatus } from '@enums/HttpStatusEnum';
+import { RootState } from "@store/store";
+import { showError } from "@lib/ToastMessages";
 
-export default function DeleteModal({
-  state,
-  setState,
-  api,
-  update,
-}: IModalDelete) {
+export default function DeleteModal({ state, setState }: IModal) {
   const toast = useRef(null);
+  const task = useSelector((state: RootState) => state.tasks.dataSelected);
+
+  const dispatch = useDispatch();
 
   const headerElement = (
     <div className="inline-flex align-items-center justify-content-center gap-2">
@@ -34,23 +32,17 @@ export default function DeleteModal({
   );
 
   const handleDelete = async () => {
-    /*
-        const res: IDocumentResponse = await api();
+    dispatch(removeTask(task._id));
+    dispatch(remove());
+    showError(toast, "", "Tarea eliminada");
 
-        if (res.status === HttpStatus.OK) {
-            showSuccess(toast, '', 'Registro eliminado.');
-            setTimeout(() => {
-                setState(!state);
-                update();
-            }, 500);
-        } else {
-            showError(toast, '', 'Contacte con soporte');
-        }
-        */
-    //Validate data
+    setTimeout(() => {
+      setState(!state);
+    }, 800);
   };
 
   const handleClose = async () => {
+    dispatch(remove());
     setState(!state);
   };
 

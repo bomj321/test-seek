@@ -115,12 +115,12 @@ const LoginPage = () => {
                 value={password}
                 id="password"
                 type="password"
-                className={`mt-3 ${
+                className="mt-3"
+                inputClassName={`w-full md:w-30rem ${
                   VerifyErrorsInForms(validations, "password")
                     ? "p-invalid"
                     : ""
-                } `}
-                inputClassName="w-full md:w-30rem"
+                }`}
                 placeholder="Contraseña"
                 feedback={false}
                 toggleMask
