@@ -30,7 +30,7 @@ const LoginPage = () => {
     setSaveMe(localStorage.getItem("saveMe") ? true : false);
   }, []);
 
-  const handleLocalStorage = () => {
+  useEffect(() => {
     if (saveMe) {
       localStorage.setItem("email", email);
       localStorage.setItem("saveMe", "true");
@@ -38,7 +38,7 @@ const LoginPage = () => {
       localStorage.removeItem("email");
       localStorage.removeItem("saveMe");
     }
-  };
+  }, [email, password, saveMe]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -89,10 +89,7 @@ const LoginPage = () => {
             <div>
               <InputText
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  handleLocalStorage();
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 id="email"
                 type="text"
                 className={`w-full ${
@@ -102,10 +99,7 @@ const LoginPage = () => {
               />
 
               <Password
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  handleLocalStorage();
-                }}
+                onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 id="password"
                 type="password"
