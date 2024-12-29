@@ -1,9 +1,7 @@
 import { State } from "@enums/StateEnum";
-import { Badge } from "primereact/badge";
+import { IBasicState } from "@interfaces/IBasicState";
 
-interface IBasicState {
-  state: string | boolean;
-}
+import { Badge } from "primereact/badge";
 
 export default function BasicStates({ state }: IBasicState) {
   switch (state) {
