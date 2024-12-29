@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import { Geist, Geist_Mono } from "next/font/google";
 import { store } from "@store/store";
 
-//import "primereact/resources/primereact.css";
 import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";

@@ -68,12 +68,6 @@ const LoginPage = () => {
       router.push("/dashboard");
     } else if (parseInt(res.error) === HttpStatus.UNAUTHORIZED) {
       showError(toast, "", "Credenciales incorrectas.");
-    } else if (parseInt(res.error) === HttpStatus.FORBIDDEN) {
-      showError(
-        toast,
-        "",
-        "Su cuenta ha sido inactivada y debe contactar al administrador."
-      );
     } else {
       showError(toast, "", "Contacte con soporte.");
     }

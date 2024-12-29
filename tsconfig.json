@@ -32,6 +32,13 @@
     },
     "target": "ES2017"
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "__mocks__/styleMock.js",
+    "next.config.ts"
+  ],
   "exclude": ["node_modules"]
 }
