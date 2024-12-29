@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 // This is for testing only
-export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+export const ProtectedRoute = ({ children }) => {
   const [isMounted, setIsMounted] = useState(false);
   const { status } = useSession(); //data:session
 

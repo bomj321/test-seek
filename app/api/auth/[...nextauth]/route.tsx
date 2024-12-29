@@ -15,7 +15,7 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
 
-      async authorize(credentials): Promise<{ email; password }> {
+      async authorize(credentials): Promise<any> {
         const correctUser = { email: "test@test.com", password: "123456" };
         if (
           credentials.email !== correctUser.email ||
