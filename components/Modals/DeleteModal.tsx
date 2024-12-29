@@ -1,15 +1,13 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { IModal } from "@interfaces/IModal";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTask, remove } from "@store/slices/tasksSlice";
-import { Toast } from "primereact/toast";
 import { RootState } from "@store/store";
 import { showError } from "@lib/ToastMessages";
 
-export default function DeleteModal({ state, setState }: IModal) {
-  const toast = useRef(null);
+export default function DeleteModal({ state, setState, toast }: IModal) {
   const task = useSelector((state: RootState) => state.tasks.dataSelected);
 
   const dispatch = useDispatch();
@@ -33,12 +31,8 @@ export default function DeleteModal({ state, setState }: IModal) {
 
   const handleDelete = async () => {
     dispatch(removeTask(task._id));
-    dispatch(remove());
+    handleClose();
     showError(toast, "", "Tarea eliminada");
-
-    setTimeout(() => {
-      setState(!state);
-    }, 800);
   };
 
   const handleClose = async () => {
@@ -59,7 +53,6 @@ export default function DeleteModal({ state, setState }: IModal) {
         setState(false);
       }}
     >
-      <Toast ref={toast} />
       <p>¿Estás seguro de eliminar este registro?</p>
     </Dialog>
   );

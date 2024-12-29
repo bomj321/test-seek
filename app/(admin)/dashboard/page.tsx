@@ -66,10 +66,15 @@ const Dashboard = () => {
 
       <Toast ref={toast} />
 
-      <TaskModal state={openModal} setState={(e) => setOpenModal(e)} />
+      <TaskModal
+        state={openModal}
+        setState={(e) => setOpenModal(e)}
+        toast={toast}
+      />
       <DeleteModal
         state={openModalClose}
         setState={(e) => setOpenModalClose(e)}
+        toast={toast}
       />
 
       <Button

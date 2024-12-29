@@ -38,7 +38,7 @@
     "**/*.ts",
     "**/*.tsx",
     "__mocks__/styleMock.js",
-    "next.config.ts"
+    "next.config.js"
   ],
   "exclude": ["node_modules"]
 }

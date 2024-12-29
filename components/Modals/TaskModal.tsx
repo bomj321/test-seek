@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { Toast } from "primereact/toast";
 import { ValidationFlow } from "@lib/ValidationFlow";
 import { showSuccess } from "@lib/ToastMessages";
 import { states } from "@lib/data";
@@ -17,8 +16,7 @@ import { IZodError } from "@interfaces/IAuth";
 import { IModal } from "@interfaces/IModal";
 import { VerifyErrorsInForms } from "@lib/VerifyErrorsInForms";
 
-export default function TaskModal({ state, setState }: IModal) {
-  const toast = useRef(null);
+export default function TaskModal({ state, setState, toast }: IModal) {
   const dispatch = useDispatch();
   const task = useSelector((state: RootState) => state.tasks.dataSelected);
 
@@ -94,9 +92,7 @@ export default function TaskModal({ state, setState }: IModal) {
       showSuccess(toast, "", "Tarea creada");
     }
 
-    setTimeout(() => {
-      handleClose();
-    }, 800);
+    handleClose();
   };
 
   const handleClose = async () => {
@@ -121,8 +117,6 @@ export default function TaskModal({ state, setState }: IModal) {
         setState(false);
       }}
     >
-      <Toast ref={toast} />
-
       <div className="flex flex-column gap-4">
         <div>
           <label htmlFor="name">
