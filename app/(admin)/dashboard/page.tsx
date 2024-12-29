@@ -17,6 +17,7 @@ import BasicActions from "@components/TableExtensions/BasicActions";
 import DeleteModal from "@components/Modals/DeleteModal";
 import { RootState } from "@store/store";
 import TaskModal from "@components/Modals/TaskModal";
+import { CutText } from "@lib/CutText";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -93,8 +94,16 @@ const Dashboard = () => {
         tableStyle={{ minWidth: "50rem" }}
       >
         <Column field="_id" header="Id"></Column>
-        <Column field="title" header="Título"></Column>
-        <Column field="description" header="Descrición"></Column>
+        <Column
+          field="title"
+          header="Título"
+          body={(rowData) => CutText(rowData.title)}
+        ></Column>
+        <Column
+          field="description"
+          header="Descrición"
+          body={(rowData) => CutText(rowData.description)}
+        ></Column>
 
         <Column
           field="state"
