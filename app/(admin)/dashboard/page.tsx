@@ -18,16 +18,6 @@ import DeleteModal from "@components/Modals/DeleteModal";
 import { RootState } from "@store/store";
 import TaskModal from "@components/Modals/TaskModal";
 
-const start = (
-  <Image
-    alt="logo"
-    src="https://primefaces.org/cdn/primereact/images/logo.png"
-    width="40"
-    height="40"
-    className="mr-2"
-  ></Image>
-);
-
 const Dashboard = () => {
   const dispatch = useDispatch();
   const toast = useRef(null);
@@ -38,6 +28,17 @@ const Dashboard = () => {
   const handleLogout = () => {
     signOut({ callbackUrl: "/", redirect: true });
   };
+
+  //Elements to Header
+  const start = (
+    <Image
+      alt="logo"
+      src="https://media.licdn.com/dms/image/v2/C4D0BAQERNQFncHNMhw/company-logo_200_200/company-logo_200_200/0/1651080962129/seek_peru_logo?e=1743638400&v=beta&t=xZuD3DXSFE_NU6ugMbUveajXXN5hRwAbQGA754wkMW0"
+      width="60"
+      height="60"
+      className="mr-2 border-circle"
+    ></Image>
+  );
 
   const end = (
     <div className="flex align-items-center gap-2">

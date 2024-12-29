@@ -12,6 +12,8 @@ import "primeicons/primeicons.css";
 
 import "primereact/resources/themes/tailwind-light/theme.css";
 
+import "./custom.scss";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

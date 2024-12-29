@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["primefaces.org"],
+    domains: ["media.licdn.com"],
   },
   reactStrictMode: false,
   eslint: {

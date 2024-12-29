@@ -14,7 +14,7 @@ const handler = NextAuth({
         },
         password: { label: "Password", type: "password" },
       },
-
+      //Any cuz I am sending a custom body to control errors.
       async authorize(credentials): Promise<any> {
         const correctUser = { email: "test@test.com", password: "123456" };
         if (

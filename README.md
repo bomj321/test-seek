@@ -6,13 +6,25 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+
+Commands to tests (Jest + Testing/library)
+
+```bash
+npm run test
+npm run test:watch
+npm run coverage
+
+```
+
+## Peculiarities
+
+I have used next-auth to control the session, primeReact and primeFlex to styles and components and redux.
+
+## Credentials
+
+email: test@test.com
+password: 123456
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
