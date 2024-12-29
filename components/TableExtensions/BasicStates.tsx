@@ -7,7 +7,7 @@ interface IBasicState {
 
 export default function BasicStates({ state }: IBasicState) {
   switch (state) {
-    case State.IN_REVIEW:
+    case State.TO_DO:
       return <Badge value="Por hacer" severity="success"></Badge>;
 
     case State.IN_PROGRESS:

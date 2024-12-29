@@ -11,7 +11,7 @@ import { states } from "@lib/data";
 import { TaskValidation } from "@validations/TaskValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store/store";
-import { addTask, updateTask } from "@store/slices/tasksSlice";
+import { addTask, remove, updateTask } from "@store/slices/tasksSlice";
 import { ITaskState } from "@interfaces/ITask";
 import { IZodError } from "@interfaces/IAuth";
 import { IModal } from "@interfaces/IModal";
@@ -42,9 +42,7 @@ export default function TaskModal({ state, setState }: IModal) {
 
   const headerElement = (
     <div className="inline-flex align-items-center justify-content-center gap-2">
-      <span className="font-bold white-space-nowrap">
-        Categoría de variable
-      </span>
+      <span className="font-bold white-space-nowrap">Tarea</span>
     </div>
   );
 
@@ -79,15 +77,23 @@ export default function TaskModal({ state, setState }: IModal) {
     if (task) {
       dispatch(
         updateTask({
-          id: task._id,
-          updatedTask: { _id: task._id, title, description, state },
+          _id: task._id,
+          updatedTask: {
+            _id: task._id,
+            title,
+            description,
+            state: stateTask.code,
+          },
         })
       );
+      showSuccess(toast, "", "Tarea editada");
     } else {
-      dispatch(addTask({ title, description, state }));
+      dispatch(
+        addTask({ _id: Date.now(), title, description, state: stateTask.code })
+      );
+      showSuccess(toast, "", "Tarea creada");
     }
 
-    showSuccess(toast, "", "Categoría creada");
     setTimeout(() => {
       handleClose();
     }, 800);
@@ -98,6 +104,7 @@ export default function TaskModal({ state, setState }: IModal) {
     setDescription("");
     setValidations([]);
     setStateTask(states[0]);
+    dispatch(remove());
     setState(!state);
   };
 

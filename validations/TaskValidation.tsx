@@ -5,7 +5,7 @@ import { ITaskPartial } from "@interfaces/ITask";
 
 const TaskSchema = z.object({
   title: z.string().min(1),
-  type: z.string().min(1),
+  description: z.string().min(1),
   state: z.string().min(1),
 });
 

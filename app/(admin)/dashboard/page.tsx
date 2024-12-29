@@ -4,18 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "next-auth/react";
 import { Button } from "primereact/button";
 import { Menubar } from "primereact/menubar";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Toast } from "primereact/toast";
 import Image from "next/image";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 
-import { setTasks, setTask } from "@store/slices/tasksSlice";
+import { setTask } from "@store/slices/tasksSlice";
 import { ITask } from "@interfaces/ITask";
 import BasicStates from "@components/TableExtensions/BasicStates";
 import BasicActions from "@components/TableExtensions/BasicActions";
 import DeleteModal from "@components/Modals/DeleteModal";
 import { RootState } from "@store/store";
+import TaskModal from "@components/Modals/TaskModal";
 
 const start = (
   <Image
@@ -31,19 +32,8 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const toast = useRef(null);
   const tasks = useSelector((state: RootState) => state.tasks.data);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const [openModalClose, setOpenModalClose] = useState<boolean>(false);
-
-  useEffect(() => {
-    // Fetch entities on component mount
-    dispatch(
-      setTasks({
-        _id: 1,
-        title: "test",
-        description: "test",
-        state: "IN_PROGRESS",
-      })
-    );
-  }, [dispatch]);
 
   const handleLogout = () => {
     signOut({ callbackUrl: "/", redirect: true });
@@ -57,6 +47,11 @@ const Dashboard = () => {
 
   //Button events
 
+  const handleEdit = (data: ITask) => {
+    dispatch(setTask(data));
+    setOpenModal(true);
+  };
+
   const handleModalDelete = (data: ITask) => {
     dispatch(setTask(data));
     setOpenModalClose(true);
@@ -64,16 +59,25 @@ const Dashboard = () => {
 
   return (
     <>
-      <header className="card mb-8">
+      <header className="card mb-5">
         <Menubar start={start} end={end} />
       </header>
 
       <Toast ref={toast} />
 
+      <TaskModal state={openModal} setState={(e) => setOpenModal(e)} />
       <DeleteModal
         state={openModalClose}
         setState={(e) => setOpenModalClose(e)}
       />
+
+      <Button
+        onClick={() => setOpenModal(true)}
+        icon="pi pi-plus"
+        className="mr-2 mb-5"
+        label="Tarea"
+      />
+
       <DataTable
         emptyMessage="Sin tareas"
         value={tasks}
@@ -95,7 +99,7 @@ const Dashboard = () => {
         <Column
           body={(rowData) => (
             <BasicActions
-              handleEdit={() => console.log("asd")} //handleEdit(rowData)
+              handleEdit={() => handleEdit(rowData)}
               handleDelete={() => handleModalDelete(rowData)}
             ></BasicActions>
           )}
