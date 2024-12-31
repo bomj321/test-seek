@@ -101,7 +101,7 @@ const Dashboard = () => {
         ></Column>
         <Column
           field="description"
-          header="Descrición"
+          header="Descripción"
           body={(rowData) => CutText(rowData.description)}
         ></Column>
 
